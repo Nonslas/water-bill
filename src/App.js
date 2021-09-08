@@ -1,23 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
+
+import { Navbar } from './Navbar';
+import { CustomersPage } from './features/customers/CustomersPage';
+import { EditCustomerForm } from './features/customers/EditCustomerForm';
+import DeleteCustomerPage from './features/customers/DeleteCustomerPage'
+import BillsList from './features/bills/BillsList'
+import AddBillForm from './features/bills/AddBillForm'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Navbar/>
+        <div className="container mx-auto">
+          <Switch>
+            <Route exact path="/customers" component={CustomersPage} />
+            <Route path="/customers/:id/edit" component={EditCustomerForm} />
+            <Route path="/customers/:id/delete" component={DeleteCustomerPage} />
+            <Route exact path="/bills" component={BillsList} />
+            <Route exact path="/bills/add" component={AddBillForm} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
